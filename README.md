@@ -33,7 +33,7 @@ import os
 import sys
 
 # Specify your dataset folder within /kaggle/input/
-input_dir = '/kaggle/input/capstone' # choose whether you want to run it on the cars dataset or the planes dataset (for planes dataset replace 'cars' with 'planes')
+input_dir = '/kaggle/input/your_repo_folder' # choose whether you want to run it on the cars dataset or the planes dataset (for planes dataset replace 'cars' with 'planes')
 output_dir = '/kaggle/working'
 
 # Change the working directory
