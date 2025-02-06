@@ -24,6 +24,30 @@ pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-pyt
 
 ## Usage Guide
 
+#### Changing Directory in Kaggle
+When running your script in Kaggle, you may need to change directories to access datasets.
+Use the following code to set up your working directory:
+
+```python
+import os
+import sys
+
+# Specify your dataset folder within /kaggle/input/
+input_dir = '/kaggle/input/capstone' # choose whether you want to run it on the cars dataset or the planes dataset (for planes dataset replace 'cars' with 'planes')
+output_dir = '/kaggle/working'
+
+# Change the working directory
+os.chdir(input_dir)
+
+# Confirm the change
+print("Current Working Directory:", os.getcwd())
+
+# Add the input directory to Python's module search path
+# This allows you to import your custom modules stored in /kaggle/input/
+sys.path.append(input_dir)
+```
+
+This ensures that your script correctly accesses the dataset and modules inside Kaggle's environment.
 
 ### How to Get a Drive Folder ID:
 1. Open the folder in **Google Drive**.
@@ -41,7 +65,7 @@ pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-pyt
 ### Connecting to Google Drive
 To authenticate and connect to Google Drive from Kaggle:
 ```python
-from drive_connect import connect_to_drive
+from your_repo_folder.drive_connect import connect_to_drive
 import os
 
 # Adjust the path to the service account key file
@@ -52,28 +76,28 @@ drive_service = connect_to_drive(SERVICE_ACCOUNT_FILE)
 
 ### Creating a Folder
 ```python
-from drive_connect import create_drive_folder
+from your_repo_folder.drive_connect import create_drive_folder
 
 folder_id = create_drive_folder("My New Folder", drive_service=drive_service)
 ```
 
 ### Uploading a File
 ```python
-from drive_connect import upload_file_to_drive
+from your_repo_folder.drive_connect import upload_file_to_drive
 
 upload_file_to_drive("local_file.txt", "uploaded_file.txt", folder_id, drive_service)
 ```
 
 ### Uploading an Entire Folder
 ```python
-from drive_connect import upload_folder_structure
+from your_repo_folder.drive_connect import upload_folder_structure
 
 folder_mapping = upload_folder_structure("my_local_folder", folder_id, drive_service)
 ```
 
 ### Searching for a File
 ```python
-from drive_connect import find_file_in_drive
+from your_repo_folder.drive_connect import find_file_in_drive
 
 file_id = find_file_in_drive("uploaded_file.txt", folder_id, drive_service)
 if file_id:
@@ -84,7 +108,7 @@ else:
 
 ### Uploading or Updating a File
 ```python
-from drive_connect import upload_or_update_file_to_drive
+from your_repo_folder.drive_connect import upload_or_update_file_to_drive
 
 upload_or_update_file_to_drive("local_file.txt", "uploaded_file.txt", folder_id, drive_service)
 ```
